@@ -1,0 +1,2 @@
+AI21_API_KEY=your_ai21_api_key_here
+BRIGHTDATA_API_KEY=your_brightdata_api_key_here
