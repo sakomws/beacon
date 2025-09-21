@@ -44,6 +44,7 @@ cp agents/stay/env_example.txt agents/stay/.env
 cp agents/work/env_example.txt agents/work/.env
 cp agents/leisure/env_example.txt agents/leisure/.env
 cp agents/shopping/env_example.txt agents/shopping/.env
+cp agents/commute/env_example.txt agents/commute/.env
 ```
 
 ### 3. Configure API Keys
@@ -68,6 +69,7 @@ cd ../stay && pip install -r requirements.txt
 cd ../work && pip install -r requirements.txt
 cd ../leisure && pip install -r requirements.txt
 cd ../shopping && pip install -r requirements.txt
+cd ../commute && pip install -r requirements.txt
 ```
 
 #### Frontend Dependencies
@@ -107,7 +109,10 @@ cd agents/leisure && python main.py &
 # Terminal 6: Start Shopping Agent
 cd agents/shopping && python main.py &
 
-# Terminal 7: Start UI
+# Terminal 7: Start Commute Agent
+cd agents/commute && python main.py &
+
+# Terminal 8: Start UI
 cd ui && npm run dev
 ```
 
@@ -123,6 +128,7 @@ curl http://localhost:8002/health  # Leisure Agent
 curl http://localhost:8003/health  # Shopping Agent
 curl http://localhost:8004/health  # Stay Agent
 curl http://localhost:8005/health  # Work Agent
+curl http://localhost:8006/health  # Commute Agent
 
 # Check UI
 curl http://localhost:3000
@@ -350,7 +356,7 @@ ENABLE_METRICS=true
 # Create health check script
 cat > health_check.sh << 'EOF'
 #!/bin/bash
-AGENTS=("8000:flight" "8001:food" "8002:leisure" "8003:shopping" "8004:stay" "8005:work")
+AGENTS=("8000:flight" "8001:food" "8002:leisure" "8003:shopping" "8004:stay" "8005:work" "8006:commute")
 
 for agent in "${AGENTS[@]}"; do
     port=$(echo $agent | cut -d: -f1)

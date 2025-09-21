@@ -9,6 +9,7 @@ Traditional travel planning requires users to visit multiple websites and platfo
 - Discover activities and entertainment options
 - Find coworking spaces for business travel
 - Shop for local products and souvenirs
+- Research transportation and commute options
 
 This fragmented approach leads to:
 - **Time Consumption**: Hours spent on multiple platforms
@@ -66,6 +67,7 @@ The Beacon Travel Agent addresses these challenges through:
 | **Work** | Coworking space discovery, amenity filtering | BrightData + Space directories |
 | **Leisure** | Activity discovery, booking integration | BrightData + Activity platforms |
 | **Shopping** | Product search, local brand discovery | BrightData + E-commerce sites |
+| **Commute** | Transportation options, multi-mode search, real-time updates | BrightData + Transport APIs |
 
 ### 2. Real-Time Data Integration
 

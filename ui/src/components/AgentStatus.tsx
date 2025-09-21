@@ -18,6 +18,7 @@ export default function AgentStatus() {
     { name: 'Shopping Agent', status: 'checking', port: 8003, lastChecked: '' },
     { name: 'Stay Agent', status: 'checking', port: 8004, lastChecked: '' },
     { name: 'Work Agent', status: 'checking', port: 8005, lastChecked: '' },
+    { name: 'Commute Agent', status: 'checking', port: 8006, lastChecked: '' },
   ]);
 
   const checkAgentHealth = async (agent: AgentStatus) => {
@@ -30,7 +31,8 @@ export default function AgentStatus() {
         'Leisure Agent': 'leisure',
         'Shopping Agent': 'shopping',
         'Stay Agent': 'hotels',
-        'Work Agent': 'work'
+        'Work Agent': 'work',
+        'Commute Agent': 'commute'
       };
       
       const agentName = agentMap[agent.name] || agent.name.toLowerCase().split(' ')[0];

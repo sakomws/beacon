@@ -23,6 +23,7 @@ Welcome to the Beacon Travel Agent documentation. This comprehensive guide cover
 | [Work Agent](agents/work-agent.md) | Coworking space discovery | Coworking search implementation |
 | [Leisure Agent](agents/leisure-agent.md) | Activity and entertainment search | Activity search implementation |
 | [Shopping Agent](agents/shopping-agent.md) | Product and shopping search | Shopping search implementation |
+| [Commute Agent](agents/commute-agent.md) | Transportation and commute options | Transportation search implementation |
 
 ### Frontend Documentation
 
@@ -54,6 +55,7 @@ cd ../stay && pip install -r requirements.txt
 cd ../work && pip install -r requirements.txt
 cd ../leisure && pip install -r requirements.txt
 cd ../shopping && pip install -r requirements.txt
+cd ../commute && pip install -r requirements.txt
 cd ../../ui && npm install
 
 # Configure environment
@@ -74,6 +76,7 @@ curl http://localhost:8002/health  # Leisure Agent
 curl http://localhost:8003/health  # Shopping Agent
 curl http://localhost:8004/health  # Stay Agent
 curl http://localhost:8005/health  # Work Agent
+curl http://localhost:8006/health  # Commute Agent
 
 # Check UI is running
 curl http://localhost:3000
@@ -91,8 +94,9 @@ The Beacon Travel Agent follows a microservices architecture with the following 
 │  - Tailwind CSS    │    │  - Response Format │    │  - Food Agent     │
 │  - TypeScript      │    │  - Error Handling  │    │  - Stay Agent     │
 └─────────────────┘    └─────────────────┘    │  - Work Agent     │
-                                              │  - Leisure Agent  │
-                                              │  - Shopping Agent │
+│  - Leisure Agent  │
+│  - Shopping Agent │
+│  - Commute Agent  │
                                               └─────────────────┘
                                                        │
                                                        ▼
@@ -119,6 +123,7 @@ The Beacon Travel Agent follows a microservices architecture with the following 
 - **Work**: Coworking space discovery
 - **Leisure**: Activity and entertainment search
 - **Shopping**: Product and local brand discovery
+- **Commute**: Transportation and commute options
 
 ### User Experience
 - **Unified Interface**: All services in one platform
@@ -161,7 +166,8 @@ beacon-travel-agent/
 │   ├── stay/              # Hotel search agent
 │   ├── work/              # Coworking search agent
 │   ├── leisure/           # Activity search agent
-│   └── shopping/          # Product search agent
+│   ├── shopping/          # Product search agent
+│   └── commute/           # Transportation search agent
 ├── ui/                    # Frontend application
 │   ├── src/
 │   │   ├── app/           # Next.js app directory
@@ -209,24 +215,29 @@ For support and questions:
 
 ## 🔄 Changelog
 
-### Version 1.1.0 (Current)
-- ✅ All systems operational and healthy
+### Version 1.2.0 (Current)
+- ✅ All 7 systems operational and healthy
 - ✅ Real data integration (no mock data)
 - ✅ Booking links for all services
 - ✅ UI fixes (Food agent now displays results)
 - ✅ Dynamic location support (Work agent)
+- ✅ New Commute Agent for transportation options
 - ✅ Comprehensive documentation updates
 - ✅ All agents using BrightData API
 
-### Version 1.0.0
-- Initial release
+### Version 1.1.0
 - All six agent services
 - Complete API documentation
 - Deployment guides
 - Frontend interface
 
+### Version 1.0.0
+- Initial release
+- Basic agent services
+- Core functionality
+
 ---
 
 **Last Updated**: January 20, 2025  
-**Version**: 1.1.0  
+**Version**: 1.2.0  
 **Maintainer**: Beacon Travel Agent Team

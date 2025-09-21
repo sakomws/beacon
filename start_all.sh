@@ -69,6 +69,7 @@ kill_port 8002 "Leisure Agent"
 kill_port 8003 "Shopping Agent"
 kill_port 8004 "Stay Agent"
 kill_port 8005 "Work Agent"
+kill_port 8006 "Commute Agent"
 
 echo ""
 
@@ -99,6 +100,7 @@ start_agent "Leisure Agent" 8002 "agents/leisure"
 start_agent "Shopping Agent" 8003 "agents/shopping"
 start_agent "Stay Agent" 8004 "agents/stay"
 start_agent "Work Agent" 8005 "agents/work"
+start_agent "Commute Agent" 8006 "agents/commute"
 
 # Wait a moment for agents to start
 echo -e "${YELLOW}⏳ Waiting for agents to initialize...${NC}"
@@ -106,8 +108,8 @@ sleep 5
 
 # Check if agents are running
 echo -e "${BLUE}🔍 Checking agent health...${NC}"
-agent_names=("Flight Agent" "Food Agent" "Leisure Agent" "Shopping Agent" "Stay Agent" "Work Agent")
-ports=(8000 8001 8002 8003 8004 8005)
+agent_names=("Flight Agent" "Food Agent" "Leisure Agent" "Shopping Agent" "Stay Agent" "Work Agent" "Commute Agent")
+ports=(8000 8001 8002 8003 8004 8005 8006)
 
 for i in "${!ports[@]}"; do
     port=${ports[$i]}
@@ -143,6 +145,7 @@ echo -e "${BLUE}🎯 Leisure Agent: http://localhost:8002${NC}"
 echo -e "${BLUE}🛍️  Shopping Agent: http://localhost:8003${NC}"
 echo -e "${BLUE}🏨 Stay Agent: http://localhost:8004${NC}"
 echo -e "${BLUE}💼 Work Agent: http://localhost:8005${NC}"
+echo -e "${BLUE}🚌 Commute Agent: http://localhost:8006${NC}"
 echo ""
 # Function to cleanup all processes
 cleanup() {
@@ -150,7 +153,7 @@ cleanup() {
     echo -e "${YELLOW}🛑 Shutting down all services...${NC}"
     
     # Kill all agent processes
-    for port in 8000 8001 8002 8003 8004 8005; do
+    for port in 8000 8001 8002 8003 8004 8005 8006; do
         local pids=$(lsof -ti:$port 2>/dev/null)
         if [ ! -z "$pids" ]; then
             echo -e "${YELLOW}🔄 Stopping processes on port $port...${NC}"

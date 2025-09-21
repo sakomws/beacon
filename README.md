@@ -5,7 +5,7 @@ A comprehensive AI-powered travel companion system that provides intelligent rec
 ## 🎯 Current Status
 
 ### ✅ All Systems Operational
-- **6 AI Agents**: All running and healthy
+- **7 AI Agents**: All running and healthy
 - **Real Data Integration**: BrightData API for live web scraping
 - **No Mock Data**: All agents use real-time data only
 - **Booking Integration**: Direct booking links for all services
@@ -22,6 +22,7 @@ A comprehensive AI-powered travel companion system that provides intelligent rec
 | 🛍️ Shopping Agent | ✅ Healthy | 8003 | Product search with purchase links |
 | 🏨 Stay Agent | ✅ Healthy | 8004 | Hotel search with booking |
 | 💼 Work Agent | ✅ Healthy | 8005 | Coworking space discovery |
+| 🚌 Commute Agent | ✅ Healthy | 8006 | Transportation and commute options |
 | 🌐 UI | ✅ Running | 3000 | Next.js frontend interface |
 
 ## 🎉 Recent Updates
@@ -48,6 +49,7 @@ A comprehensive AI-powered travel companion system that provides intelligent rec
 - **🏨 Stay Search**: Hotel and accommodation recommendations with amenity scoring
 - **🍽️ Food Discovery**: Restaurant recommendations with cuisine filtering and reservations
 - **🎯 Leisure Activities**: Activity search with duration and type filtering
+- **🚌 Commute Options**: Transportation and commute recommendations with real-time updates
 - **🛍️ Shopping Assistant**: Product recommendations with brand and value analysis
 - **💼 Work Spaces**: Coworking space discovery with amenity matching
 
@@ -77,6 +79,7 @@ Each agent is a standalone microservice:
 | Shopping | 8003 | `agents/shopping/` | Product search and purchasing |
 | Stay | 8004 | `agents/stay/` | Hotel search and booking |
 | Work | 8005 | `agents/work/` | Job search and applications |
+| Commute | 8006 | `agents/commute/` | Transportation and commute options |
 
 ## 🚀 Quick Start
 
@@ -225,7 +228,7 @@ Each agent implements a sophisticated scoring system (0-100 scale) based on mult
 ```bash
 POST /api/proxy
 {
-  "agent": "flights|food|leisure|shopping|hotels|work",
+  "agent": "flights|food|leisure|shopping|hotels|work|commute",
   "action": "search",
   ...searchData
 }
@@ -235,7 +238,7 @@ POST /api/proxy
 ```bash
 POST /api/proxy
 {
-  "agent": "flights|food|leisure|shopping|hotels|work",
+  "agent": "flights|food|leisure|shopping|hotels|work|commute",
   "action": "book|reserve|purchase|apply",
   ...bookingData
 }
@@ -279,6 +282,10 @@ GET /api/proxy  # List all available agents
 - `POST /apply-job` - Apply for a job
 - `GET /health` - Health check
 
+#### Commute Agent (Port 8006)
+- `POST /search` - Search for commute options
+- `GET /health` - Health check
+
 ## 🧪 Testing
 
 ### Quick System Test
@@ -307,6 +314,10 @@ curl -X POST http://localhost:3000/api/proxy \
 curl -X POST http://localhost:3000/api/proxy \
   -H "Content-Type: application/json" \
   -d '{"agent": "work", "action": "search", "location": "Hawaii", "space_type": "all", "amenities": [], "price_range": "all"}'
+
+curl -X POST http://localhost:3000/api/proxy \
+  -H "Content-Type: application/json" \
+  -d '{"agent": "commute", "action": "search", "origin": "San Francisco", "destination": "Hawaii", "transport_mode": "all"}'
 ```
 
 ### Test Individual Agents (Direct)
@@ -320,6 +331,11 @@ curl -X POST http://localhost:8000/search \
 curl -X POST http://localhost:8001/search-restaurants \
   -H "Content-Type: application/json" \
   -d '{"location": "Hawaii", "cuisine": "all", "price_range": "all", "rating": 0.0}'
+
+# Test commute search
+curl -X POST http://localhost:8006/search \
+  -H "Content-Type: application/json" \
+  -d '{"origin": "San Francisco", "destination": "Hawaii", "transport_mode": "all"}'
 ```
 
 ### Health Checks
@@ -335,6 +351,7 @@ curl http://localhost:8002/health  # Leisure
 curl http://localhost:8003/health  # Shopping
 curl http://localhost:8004/health  # Stay
 curl http://localhost:8005/health  # Work
+curl http://localhost:8006/health  # Commute
 ```
 
 ## 🛠️ Development

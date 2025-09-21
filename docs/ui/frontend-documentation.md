@@ -6,7 +6,7 @@ The Beacon Travel Agent frontend is built with Next.js 15, TypeScript, and Tailw
 ## Current Status
 - **Status**: ✅ Fully functional and operational
 - **Port**: 3000
-- **All Tabs Working**: Flight, Food, Leisure, Shopping, Stay, Work
+- **All Tabs Working**: Flight, Food, Leisure, Shopping, Stay, Work, Commute
 - **Real Data Integration**: All components display live data
 - **Booking Links**: Direct booking integration for all services
 - **UI Fixes**: Food agent now properly displays search results
@@ -33,7 +33,8 @@ ui/
 │   │   │   ├── leisure/search/
 │   │   │   ├── shopping/search/
 │   │   │   ├── hotels/search/
-│   │   │   └── work/search/
+│   │   │   ├── work/search/
+│   │   │   └── commute/
 │   │   ├── api-docs/
 │   │   │   └── page.tsx              # API documentation
 │   │   ├── globals.css               # Global styles
@@ -46,7 +47,8 @@ ui/
 │       ├── RestaurantSearch.tsx      # Restaurant search component
 │       ├── ActivitySearch.tsx        # Activity search component
 │       ├── ShoppingSearch.tsx        # Shopping search component
-│       └── WorkSearch.tsx            # Work search component
+│       ├── WorkSearch.tsx            # Work search component
+│       └── CommuteSearch.tsx         # Commute search component
 ├── public/                           # Static assets
 ├── package.json                      # Dependencies
 ├── tailwind.config.ts               # Tailwind configuration
@@ -143,6 +145,12 @@ Each service has its own search component with consistent patterns:
 - Salary range filtering
 - Application system integration
 
+#### CommuteSearch.tsx
+- Transportation search with origin and destination
+- Multi-mode transport filtering (public transit, rideshare, driving, walking, cycling)
+- Real-time duration, cost, and distance information
+- Booking integration for each transport mode
+
 ## API Integration
 
 ### Unified Proxy API
@@ -151,7 +159,7 @@ All components use the unified proxy API at `/api/proxy` for consistent communic
 **Request Format:**
 ```typescript
 {
-  agent: 'flights' | 'food' | 'leisure' | 'shopping' | 'hotels' | 'work',
+  agent: 'flights' | 'food' | 'leisure' | 'shopping' | 'hotels' | 'work' | 'commute',
   action: 'search' | 'book' | 'reserve' | 'purchase' | 'apply',
   ...searchData
 }
@@ -310,6 +318,11 @@ npm run test
 curl -X POST http://localhost:3000/api/proxy \
   -H "Content-Type: application/json" \
   -d '{"agent": "flights", "action": "search", "origin": "SF", "destination": "Hawaii"}'
+
+# Test commute API
+curl -X POST http://localhost:3000/api/proxy \
+  -H "Content-Type: application/json" \
+  -d '{"agent": "commute", "action": "search", "origin": "SF", "destination": "Hawaii", "transport_mode": "all"}'
 ```
 
 ### E2E Testing

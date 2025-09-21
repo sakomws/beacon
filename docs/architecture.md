@@ -7,7 +7,7 @@ The Beacon Travel Agent is a comprehensive travel planning platform that uses AI
 ## Current Status
 
 ### ✅ All Systems Operational
-- **6 AI Agents**: All running and healthy on ports 8000-8005
+- **7 AI Agents**: All running and healthy on ports 8000-8006
 - **Real Data Integration**: BrightData API for live web scraping
 - **No Mock Data**: All agents use real-time data exclusively
 - **Booking Integration**: Direct booking links for all services
@@ -34,6 +34,7 @@ graph TB
         Work[Work Agent]
         Leisure[Leisure Agent]
         Shopping[Shopping Agent]
+        Commute[Commute Agent]
     end
     
     subgraph "External Services"
@@ -55,6 +56,7 @@ graph TB
     Proxy --> Work
     Proxy --> Leisure
     Proxy --> Shopping
+    Proxy --> Commute
     
     Flight --> BrightData
     Food --> BrightData
@@ -62,6 +64,7 @@ graph TB
     Work --> BrightData
     Leisure --> BrightData
     Shopping --> BrightData
+    Commute --> BrightData
     
     Flight --> AI21
     Food --> AI21
@@ -69,6 +72,7 @@ graph TB
     Work --> AI21
     Leisure --> AI21
     Shopping --> AI21
+    Commute --> AI21
     
     BrightData --> JSON
     JSON --> Cache
@@ -148,6 +152,13 @@ Each agent is an independent FastAPI service with specific responsibilities:
 - **Purpose**: Product and shopping search
 - **Data Sources**: BrightData API for product information
 - **Key Features**: Category filtering, brand matching, purchase links
+- **Status**: ✅ Healthy - Real-time data integration working
+
+#### Commute Agent (`agents/commute/`)
+- **Port**: 8006
+- **Purpose**: Transportation and commute options search
+- **Data Sources**: BrightData API for transportation data
+- **Key Features**: Multi-mode transport search, real-time updates, booking integration
 - **Status**: ✅ Healthy - Real-time data integration working
 
 ## Data Flow
@@ -234,6 +245,7 @@ BRIGHTDATA_API_KEY=your_brightdata_key
 | Shopping Agent | 8003 | Product search |
 | Stay Agent | 8004 | Hotel search |
 | Work Agent | 8005 | Coworking search |
+| Commute Agent | 8006 | Transportation search |
 
 ## Security Considerations
 

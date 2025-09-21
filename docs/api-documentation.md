@@ -7,7 +7,7 @@ The Beacon Travel Agent provides a comprehensive REST API for travel-related ser
 ## Current Status
 
 ### ✅ All APIs Operational
-- **6 Agent APIs**: All running and healthy on ports 8000-8005
+- **7 Agent APIs**: All running and healthy on ports 8000-8006
 - **API Proxy**: Unified gateway on port 3000
 - **Real Data**: All agents use BrightData API for live data
 - **Booking Integration**: Direct booking links in all responses
@@ -24,6 +24,7 @@ The Beacon Travel Agent provides a comprehensive REST API for travel-related ser
 | Shopping Agent | `http://localhost:8003` | 8003 |
 | Stay Agent | `http://localhost:8004` | 8004 |
 | Work Agent | `http://localhost:8005` | 8005 |
+| Commute Agent | `http://localhost:8006` | 8006 |
 
 ## Common Endpoints
 
@@ -305,6 +306,77 @@ POST /search-products
 }
 ```
 
+## Commute Agent API
+
+### Search Commute Options
+
+```http
+POST /search
+```
+
+**Request Body:**
+```json
+{
+  "origin": "San Francisco",
+  "destination": "Hawaii",
+  "transport_mode": "all",
+  "departure_time": "2025-10-03T09:00:00Z"
+}
+```
+
+**Response:**
+```json
+{
+  "origin": "San Francisco",
+  "destination": "Hawaii",
+  "options": [
+    {
+      "mode": "Public Transit",
+      "duration": "25 minutes",
+      "cost": "$3.50",
+      "distance": "8.2 miles",
+      "description": "Take the metro from San Francisco to Hawaii. Includes 1 transfer at Central Station. Real-time updates available.",
+      "booking_url": "https://www.google.com/maps/dir/San+Francisco/Hawaii/@transit",
+      "provider": "Transit Authority",
+      "real_time_info": "Next train in 3 minutes"
+    },
+    {
+      "mode": "Rideshare",
+      "duration": "18 minutes",
+      "cost": "$12.50",
+      "distance": "7.8 miles",
+      "description": "Uber/Lyft from San Francisco to Hawaii. Direct route with minimal traffic. Estimated pickup time: 2-4 minutes.",
+      "booking_url": "https://www.uber.com/ride/?pickup=San+Francisco&destination=Hawaii",
+      "provider": "Uber/Lyft",
+      "real_time_info": "2 cars available nearby"
+    },
+    {
+      "mode": "Driving",
+      "duration": "22 minutes",
+      "cost": "$8.50",
+      "distance": "7.8 miles",
+      "description": "Drive from San Francisco to Hawaii. Route includes tolls. Current traffic: moderate. Parking available at destination.",
+      "booking_url": "https://www.google.com/maps/dir/San+Francisco/Hawaii/@driving",
+      "provider": "Google Maps",
+      "real_time_info": "Traffic: 5 min delay"
+    }
+  ],
+  "total_options": 5,
+  "search_time": "Search completed at 1703123456.789"
+}
+```
+
+### Transport Modes
+
+The Commute Agent supports the following transport modes:
+
+- **all**: Search across all transportation options
+- **public_transit**: Buses, metro, subway, trains
+- **rideshare**: Uber, Lyft, taxi services
+- **driving**: Personal vehicle, car rental
+- **walking**: Pedestrian routes
+- **cycling**: Bicycle, bike sharing
+
 ## Error Responses
 
 ### Standard Error Format
@@ -395,6 +467,26 @@ const data = await response.json();
 const restaurants = data.options;
 ```
 
+### Commute Search Example
+
+```javascript
+// Search for commute options
+const response = await fetch('http://localhost:8006/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    origin: 'San Francisco',
+    destination: 'Hawaii',
+    transport_mode: 'all'
+  })
+});
+
+const data = await response.json();
+const commuteOptions = data.options;
+```
+
 ## Testing
 
 ### Health Check Test
@@ -414,9 +506,26 @@ curl -X POST "http://localhost:8000/search" \
     "departure_date": "2025-10-03",
     "passengers": 1
   }'
+
+### Commute Search Test
+
+```bash
+curl -X POST "http://localhost:8006/search" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "origin": "San Francisco",
+    "destination": "Hawaii",
+    "transport_mode": "all"
+  }'
 ```
 
 ## Changelog
+
+### Version 1.2.0
+- Added Commute Agent API (port 8006)
+- Transportation and commute options search
+- Multi-mode transport support
+- Real-time booking integration
 
 ### Version 1.0.0
 - Initial API release

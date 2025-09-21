@@ -7,6 +7,7 @@ import RestaurantSearch from '@/components/RestaurantSearch';
 import ActivitySearch from '@/components/ActivitySearch';
 import ShoppingSearch from '@/components/ShoppingSearch';
 import WorkSearch from '@/components/WorkSearch';
+import CommuteSearch from '@/components/CommuteSearch';
 import AgentStatus from '@/components/AgentStatus';
 
 export default function TravelAgent() {
@@ -19,6 +20,7 @@ export default function TravelAgent() {
     { id: 'activities', name: 'Leisure', icon: '🎯' },
     { id: 'shopping', name: 'Shopping', icon: '🛍️' },
     { id: 'work', name: 'Work', icon: '💼' },
+    { id: 'commute', name: 'Commute', icon: '🚌' },
   ];
 
   const renderActiveComponent = () => {
@@ -35,6 +37,8 @@ export default function TravelAgent() {
         return <ShoppingSearch />;
       case 'work':
         return <WorkSearch />;
+      case 'commute':
+        return <CommuteSearch />;
       default:
         return <FlightSearch />;
     }

@@ -31,6 +31,11 @@ const AGENTS = {
     port: 8005,
     searchEndpoint: '/search-coworking',
     name: 'Work Agent'
+  },
+  commute: {
+    port: 8006,
+    searchEndpoint: '/search',
+    name: 'Commute Agent'
   }
 };
 
@@ -87,6 +92,9 @@ export async function POST(request: NextRequest) {
             break;
           case 'work':
             endpoint = '/book-space';
+            break;
+          case 'commute':
+            endpoint = '/book';
             break;
           default:
             return NextResponse.json(
