@@ -108,9 +108,16 @@ export default function AgentStatus() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold text-gray-900">
-          🤖 Agent Status
-        </h3>
+        <div className="flex items-center">
+          <img 
+            src="/beacon-logo-simple.svg" 
+            alt="Beacon Logo" 
+            className="w-8 h-8 mr-3"
+          />
+          <h3 className="text-xl font-semibold text-gray-900">
+            Agent Status
+          </h3>
+        </div>
         <div className="flex items-center space-x-4">
           <span className="text-sm text-gray-600">
             {healthyCount}/{totalCount} agents healthy

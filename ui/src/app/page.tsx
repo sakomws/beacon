@@ -45,9 +45,16 @@ export default function TravelAgent() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            🧳 Beacon Travel Agent
-          </h1>
+          <div className="flex items-center justify-center mb-4">
+            <img 
+              src="/beacon-logo-simple.svg" 
+              alt="Beacon Travel Agent Logo" 
+              className="w-16 h-16 mr-4"
+            />
+            <h1 className="text-4xl font-bold text-gray-900">
+              Beacon Travel Agent
+            </h1>
+          </div>
           <p className="text-lg text-gray-600 mb-4">
             Your AI-powered travel companion for flights, hotels, dining, and more
           </p>
